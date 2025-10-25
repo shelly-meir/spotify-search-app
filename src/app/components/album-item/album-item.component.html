@@ -1,0 +1,26 @@
+<mat-card class="album-card" (click)="onAlbumClick()">
+  <mat-card-header>
+    <mat-card-title>{{ album().name }}</mat-card-title>
+    <mat-card-subtitle>{{ getArtistNames() }}</mat-card-subtitle>
+  </mat-card-header>
+  
+  <img 
+    mat-card-image 
+    [src]="getAlbumImage()" 
+    [alt]="album().name"
+    class="album-image"
+  />
+  
+  <mat-card-content>
+    <p class="release-date">
+      <strong>Release Date:</strong> {{ album().release_date }}
+    </p>
+    <p class="album-type">
+      <strong>Type:</strong> {{ album().album_type }}
+    </p>
+  </mat-card-content>
+  
+  <mat-card-actions>
+    <button mat-button color="primary">VIEW DETAILS</button>
+  </mat-card-actions>
+</mat-card>

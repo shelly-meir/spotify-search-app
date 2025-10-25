@@ -1,0 +1,146 @@
+<div class="registration-container">
+  <mat-card class="registration-card">
+    <mat-card-header>
+      <mat-card-title>User Registration</mat-card-title>
+      <mat-card-subtitle>Create your account</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <!-- Email Field -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            formControlName="email"
+            type="email"
+            placeholder="example@email.com"
+          />
+          <mat-icon matPrefix>email</mat-icon>
+          @if (registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched) {
+            <mat-error>{{ getEmailError() }}</mat-error>
+          }
+          <mat-hint>Enter a valid email address</mat-hint>
+        </mat-form-field>
+
+        <!-- Username Field -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            formControlName="username"
+            type="text"
+            placeholder="johndoe123"
+          />
+          <mat-icon matPrefix>person</mat-icon>
+          @if (registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched) {
+            <mat-error>{{ getUsernameError() }}</mat-error>
+          }
+          <mat-hint>Only English characters and numbers (cannot start with a number)</mat-hint>
+        </mat-form-field>
+
+        <!-- Password Field -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            formControlName="password"
+            [type]="hidePassword() ? 'password' : 'text'"
+            placeholder="Enter your password"
+          />
+          <mat-icon matPrefix>lock</mat-icon>
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="togglePasswordVisibility()"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePassword()"
+          >
+            <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          @if (registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched) {
+            <mat-error>{{ getPasswordError() }}</mat-error>
+          }
+          <mat-hint>At least 1 uppercase letter, 1 number, and no spaces</mat-hint>
+        </mat-form-field>
+
+        <!-- Form Status -->
+        <div class="form-status">
+          @if (registrationForm.valid) {
+            <div class="status-message valid">
+              <mat-icon>check_circle</mat-icon>
+              <span>All fields are valid!</span>
+            </div>
+          }
+          @if (registrationForm.invalid && isFormTouched) {
+            <div class="status-message invalid">
+              <mat-icon>error</mat-icon>
+              <span>Please fix the errors above</span>
+            </div>
+          }
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="form-actions">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="registrationForm.invalid"
+            class="submit-button"
+          >
+            <mat-icon>person_add</mat-icon>
+            Register
+          </button>
+
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="onReset()"
+            class="reset-button"
+          >
+            <mat-icon>refresh</mat-icon>
+            Reset
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Validation Rules Information -->
+  <mat-card class="info-card">
+    <mat-card-header>
+      <mat-card-title>Validation Rules</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="rule-item">
+        <mat-icon>email</mat-icon>
+        <div>
+          <strong>Email:</strong>
+          <p>Must be a valid email format (e.g., user&#64;example.com)</p>
+        </div>
+      </div>
+
+      <div class="rule-item">
+        <mat-icon>person</mat-icon>
+        <div>
+          <strong>Username:</strong>
+          <p>Only English letters and numbers</p>
+          <p>Cannot start with a number</p>
+          <p>No spaces allowed</p>
+        </div>
+      </div>
+
+      <div class="rule-item">
+        <mat-icon>lock</mat-icon>
+        <div>
+          <strong>Password:</strong>
+          <p>At least 1 uppercase letter</p>
+          <p>At least 1 number</p>
+          <p>No spaces allowed</p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

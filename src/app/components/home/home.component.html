@@ -1,0 +1,101 @@
+<div class="home-container">
+  <div class="search-section">
+    <h1>Search for Music Albums</h1>
+
+    <div class="search-bar">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search albums...</mat-label>
+        <input
+          matInput
+          [(ngModel)]="searchQuery"
+          (keyup.enter)="onSearch()"
+          placeholder="e.g., Taylor Swift, Thriller, Abbey Road"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onSearch()"
+        [disabled]="loading() || !searchQuery().trim()"
+        class="search-button"
+      >
+        Search
+      </button>
+    </div>
+
+    @if (lastFiveQueries().length > 0) {
+      <div class="recent-queries">
+        <h3>Recent Searches</h3>
+        <mat-chip-set>
+          @for (queryItem of lastFiveQueries(); track queryItem.query) {
+            <mat-chip
+              (click)="onQueryChipClick(queryItem.query)"
+              class="query-chip"
+            >
+              {{ queryItem.query }}
+            </mat-chip>
+          }
+        </mat-chip-set>
+      </div>
+    }
+  </div>
+
+  @if (loading()) {
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>Searching for albums...</p>
+    </div>
+  }
+
+  @if (!loading() && searchResults().length > 0) {
+    <div class="results-section">
+      <h2>Search Results ({{ searchResults().length }} albums found)</h2>
+
+      <cdk-virtual-scroll-viewport
+        [itemSize]="itemHeight"
+        class="albums-viewport">
+
+        <div class="albums-grid-row"
+          *cdkVirtualFor="let rowIndex of getRowIndices(); trackBy: trackByIndex">
+          @for (album of getAlbumsForRow(rowIndex); track album.id) {
+            <app-album-item
+              [album]="album"
+              (albumClick)="onAlbumClick($event)"
+              class="grid-item"
+            />
+          }
+        </div>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  }
+
+  @if (!loading() && searchResults().length === 0 && searchQuery()) {
+    <div class="no-results">
+      <mat-icon>search_off</mat-icon>
+      <h3>No albums found</h3>
+      <p>Try searching with different keywords</p>
+    </div>
+  }
+
+  @if (!loading() && searchResults().length === 0 && !searchQuery()) {
+    <div class="empty-state">
+      <mat-icon>library_music</mat-icon>
+      <h3>Start searching for your favorite albums</h3>
+      <p>Enter an artist name, album title, or any keyword above</p>
+    </div>
+  }
+
+  @if (!loading() && apiError()) {
+    <div class="error-state">
+      <mat-icon>error_outline</mat-icon>
+      <h3>Oops! Something went wrong</h3>
+      <p>{{ apiError() }}</p>
+      <button mat-raised-button color="primary" (click)="onRetry()">
+        <mat-icon>refresh</mat-icon>
+        Try Again
+      </button>
+    </div>
+  }
+</div>

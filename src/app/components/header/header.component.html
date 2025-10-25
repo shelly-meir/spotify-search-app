@@ -1,0 +1,22 @@
+<mat-toolbar color="primary" class="app-header">
+  <div class="header-content">
+    <div class="brand" (click)="navigateHome()">
+      <span class="app-title">Spotify Search</span>
+    </div>
+
+    <div class="current-route">
+      <span>{{ currentRoute() }}</span>
+    </div>
+
+    <nav class="nav-links">
+      <button mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </button>
+      <button mat-button routerLink="/registration" routerLinkActive="active">
+        <mat-icon>person_add</mat-icon>
+        <span>Register</span>
+      </button>
+    </nav>
+  </div>
+</mat-toolbar>
