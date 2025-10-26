@@ -27,9 +27,12 @@
     <mat-card class="album-details-card">
       <div class="album-content">
         <div class="album-image-section">
-          <img 
-            [src]="getAlbumImage()" 
+          <img
+            [ngSrc]="getAlbumImage()"
             [alt]="album()!.name"
+            width="400"
+            height="400"
+            priority
             class="album-cover"
           />
         </div>
@@ -84,9 +87,9 @@
           </div>
 
           <div class="actions">
-            <button 
-              mat-raised-button 
-              color="primary" 
+            <button
+              mat-raised-button
+              color="primary"
               (click)="openSpotify()"
               class="spotify-button"
             >

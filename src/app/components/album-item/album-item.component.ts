@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { SpotifyAlbum } from '../../models/spotify.model';
@@ -7,7 +7,7 @@ import { SpotifyAlbum } from '../../models/spotify.model';
 @Component({
   selector: 'app-album-item',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule],
+  imports: [CommonModule, NgOptimizedImage, MatCardModule, MatButtonModule],
   templateUrl: './album-item.component.html',
   styleUrl: './album-item.component.scss',
 })

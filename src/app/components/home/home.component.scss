@@ -42,12 +42,33 @@
       color: #555;
     }
 
-    .query-chip {
-      cursor: pointer;
-      transition: background-color 0.2s;
+    mat-chip-set {
+      mat-chip {
+        cursor: pointer !important;
+        transition: all 0.2s;
 
-      &:hover {
-        background-color: rgba(63, 81, 181, 0.1);
+        &:hover {
+          background-color: rgba(63, 81, 181, 0.2) !important;
+          transform: translateY(-2px);
+        }
+      }
+    }
+
+    ::ng-deep {
+      .mat-mdc-chip {
+        cursor: pointer !important;
+
+        &:hover {
+          background-color: rgba(63, 81, 181, 0.2) !important;
+        }
+      }
+
+      .mat-mdc-chip-action {
+        cursor: pointer !important;
+      }
+
+      .mdc-evolution-chip__action--primary {
+        cursor: pointer !important;
       }
     }
   }
