@@ -1,20 +1,17 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { AlbumDetailsComponent } from './components/album-details/album-details.component';
-import { RegistrationComponent } from './components/registration/registration.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    loadComponent: () => import('./components/home/home.component').then(m => m.HomeComponent),
   },
   {
     path: 'album/:id',
-    component: AlbumDetailsComponent,
+    loadComponent: () => import('./components/album-details/album-details.component').then(m => m.AlbumDetailsComponent),
   },
   {
     path: 'registration',
-    component: RegistrationComponent,
+    loadComponent: () => import('./components/registration/registration.component').then(m => m.RegistrationComponent),
   },
   {
     path: '**',
