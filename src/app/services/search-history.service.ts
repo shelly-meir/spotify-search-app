@@ -39,8 +39,8 @@ export class SearchHistoryService {
   private saveSearchQueriesToStorage(queries: SearchQuery[]): void {
     try {
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(queries));
-    } catch (error) {
-      console.error('Failed to save search queries:', error);
+    } catch {
+      // Silently fail - localStorage might be disabled
     }
   }
 
@@ -57,9 +57,8 @@ export class SearchHistoryService {
         }));
         this.searchQueriesSignal.set(parsedQueries);
       }
-    } catch (error) {
-      console.error('Failed to load search queries:', error);
+    } catch {
+      // Silently fail - localStorage might be corrupted
     }
   }
 }
-

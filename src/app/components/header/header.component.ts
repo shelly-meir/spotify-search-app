@@ -1,4 +1,4 @@
-import { Component, inject, signal, effect } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -27,10 +27,10 @@ export class HeaderComponent {
     // Listen to route changes
     this.router.events
       .pipe(
-        filter(event => event instanceof NavigationEnd),
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
         untilDestroyed(this)
       )
-      .subscribe((event: any) => {
+      .subscribe((event: NavigationEnd) => {
         this.updateCurrentRoute(event.urlAfterRedirects);
       });
   }

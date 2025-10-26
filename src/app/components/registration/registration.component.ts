@@ -107,10 +107,6 @@ export class RegistrationComponent {
 
   onSubmit(): void {
     if (this.registrationForm.valid) {
-      const formValue = this.registrationForm.value;
-
-      // In a real application, you would send this to a backend API
-      console.log('Registration data:', formValue);
 
       this.snackBar.open('Registration successful!', 'Close', {
         duration: 3000,
@@ -119,10 +115,8 @@ export class RegistrationComponent {
         panelClass: ['success-snackbar'],
       });
 
-      // Reset form
       this.registrationForm.reset();
 
-      // Optional: Navigate to home page
       setTimeout(() => {
         this.router.navigate(['/']);
       }, 2000);

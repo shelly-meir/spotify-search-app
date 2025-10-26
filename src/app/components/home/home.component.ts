@@ -1,4 +1,4 @@
-import { Component, inject, signal, effect, OnInit } from '@angular/core';
+import { Component, inject, signal, effect, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -75,7 +75,11 @@ export class HomeComponent implements OnInit {
           });
         },
       });
-    window.addEventListener('resize', () => this.updateItemsPerRow());
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.updateItemsPerRow();
   }
 
   onSearch(): void {
@@ -132,4 +136,3 @@ export class HomeComponent implements OnInit {
     }
   }
 }
-

@@ -55,9 +55,8 @@ export class SpotifyService {
           this.errorSignal.set(null);
         }),
         map(response => response.access_token),
-        catchError(error => {
+        catchError(() => {
           this.errorSignal.set('Failed to authenticate with Spotify');
-          console.error('Authentication error:', error);
           return of('');
         })
       );
@@ -103,7 +102,6 @@ export class SpotifyService {
           } else {
             this.errorSignal.set('Failed to search albums. Please try again.');
           }
-          console.error('Search error:', error);
           this.searchResultsSignal.set([]);
           return of([]);
         })
@@ -123,9 +121,8 @@ export class SpotifyService {
     });
 
     return this.http.get<SpotifyAlbum>(`${this.SPOTIFY_API_URL}/albums/${id}`, { headers }).pipe(
-      catchError(error => {
+      catchError(() => {
         this.errorSignal.set('Failed to load album details.');
-        console.error('Album fetch error:', error);
         return of(null);
       })
     );
