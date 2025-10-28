@@ -1,4 +1,4 @@
-import { Component, inject, signal, effect, OnInit, HostListener } from '@angular/core';
+import { Component, inject, signal, effect, OnInit, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -34,6 +34,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
   private spotifyService = inject(SpotifyService);

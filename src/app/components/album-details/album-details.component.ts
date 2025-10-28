@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,6 +25,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   ],
   templateUrl: './album-details.component.html',
   styleUrl: './album-details.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlbumDetailsComponent implements OnInit {
   private spotifyService = inject(SpotifyService);
