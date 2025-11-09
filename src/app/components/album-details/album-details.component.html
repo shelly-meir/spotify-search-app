@@ -1,0 +1,104 @@
+<div class="album-details-container">
+  <div class="header-actions">
+    <button mat-raised-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      Back to Search
+    </button>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>Loading album details...</p>
+    </div>
+  }
+
+  @if (error()) {
+    <div class="error-container">
+      <mat-icon>error_outline</mat-icon>
+      <h2>{{ error() }}</h2>
+      <button mat-raised-button color="primary" (click)="goBack()">
+        Return to Search
+      </button>
+    </div>
+  }
+
+  @if (!loading() && !error() && album()) {
+    <mat-card class="album-details-card">
+      <div class="album-content">
+        <div class="album-image-section">
+          <img
+            [ngSrc]="getAlbumImage()"
+            [alt]="album()!.name"
+            width="400"
+            height="400"
+            priority
+            class="album-cover"
+          />
+        </div>
+
+        <div class="album-info-section">
+          <h1>{{ album()!.name }}</h1>
+          <h2>{{ getArtistNames() }}</h2>
+
+          <div class="details-grid">
+            <div class="detail-item">
+              <mat-icon>calendar_today</mat-icon>
+              <div>
+                <strong>Release Date</strong>
+                <p>{{ album()!.release_date }}</p>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <mat-icon>album</mat-icon>
+              <div>
+                <strong>Album Type</strong>
+                <p>{{ album()!.album_type }}</p>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <mat-icon>library_music</mat-icon>
+              <div>
+                <strong>Total Tracks</strong>
+                <p>{{ album()!.total_tracks }}</p>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <mat-icon>link</mat-icon>
+              <div>
+                <strong>Spotify ID</strong>
+                <p>{{ album()!.id }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="artists-section">
+            <h3>Artists</h3>
+            <mat-chip-set>
+              @for (artist of album()!.artists; track artist.id) {
+                <mat-chip>
+                  {{ artist.name }}
+                </mat-chip>
+              }
+            </mat-chip-set>
+          </div>
+
+          <div class="actions">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="openSpotify()"
+              class="spotify-button"
+            >
+              <mat-icon>open_in_new</mat-icon>
+              Open in Spotify
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  }
+</div>

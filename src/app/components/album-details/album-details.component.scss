@@ -1,0 +1,147 @@
+.album-details-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+
+  .header-actions {
+    margin-bottom: 24px;
+
+    button {
+      mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .loading-container,
+  .error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 0;
+    text-align: center;
+
+    mat-icon {
+      font-size: 64px;
+      width: 64px;
+      height: 64px;
+      color: #999;
+      margin-bottom: 16px;
+    }
+
+    p,
+    h2 {
+      color: #666;
+      margin-bottom: 16px;
+    }
+  }
+
+  .album-details-card {
+    .album-content {
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: 48px;
+      padding: 24px;
+
+      .album-image-section {
+        .album-cover {
+          width: 100%;
+          height: auto;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+      }
+
+      .album-info-section {
+        h1 {
+          font-size: 36px;
+          margin-bottom: 8px;
+          color: #333;
+        }
+
+        h2 {
+          font-size: 24px;
+          color: #666;
+          margin-bottom: 32px;
+          font-weight: 400;
+        }
+
+        .details-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 24px;
+          margin-bottom: 32px;
+
+          .detail-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+
+            mat-icon {
+              color: #666;
+              margin-top: 4px;
+            }
+
+            strong {
+              display: block;
+              font-size: 14px;
+              color: #999;
+              margin-bottom: 4px;
+            }
+
+            p {
+              font-size: 16px;
+              color: #333;
+              margin: 0;
+              word-break: break-all;
+            }
+          }
+        }
+
+        .artists-section {
+          margin-bottom: 32px;
+
+          h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #333;
+          }
+        }
+
+        .actions {
+          .spotify-button {
+            mat-icon {
+              margin-right: 8px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 968px) {
+  .album-details-container {
+    .album-details-card {
+      .album-content {
+        grid-template-columns: 1fr;
+        gap: 24px;
+
+        .album-image-section {
+          .album-cover {
+            max-width: 400px;
+            margin: 0 auto;
+            display: block;
+          }
+        }
+
+        .album-info-section {
+          .details-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      }
+    }
+  }
+}
